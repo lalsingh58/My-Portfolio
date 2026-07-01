@@ -1,0 +1,1075 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lal Singh Dharmi — Cyber Portfolio</title>
+
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               script-src 'self' https://cdnjs.cloudflare.com;
+               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+               font-src https://fonts.gstatic.com;
+               img-src 'self' data:;
+               connect-src 'self';
+               object-src 'none';
+               base-uri 'self';
+               form-action 'self' mailto:;
+               frame-ancestors 'none';
+               upgrade-insecure-requests"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+
+    <!-- Third-party scripts: pinned version, loaded from a fixed CDN only
+         (allow-listed in the CSP script-src above). If this CDN is ever
+         compromised the CSP still blocks any *other* script source, and the
+         inline event-handler-free JS below degrades gracefully if these
+         fail to load (see script.js "gsapReady" checks). -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <noscript>
+      <style>
+        .reveal {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <canvas id="matrix-canvas"></canvas>
+
+    <div class="wrap">
+      <!-- TOPBAR -->
+      <div class="topbar">
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Menu"
+          type="button"
+        >
+          <svg
+            width="17"
+            height="17"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+        <div class="status-group">
+          <div class="status-item">
+            <span class="dot pulse"></span>
+            <span
+              ><span class="label">System</span
+              ><span class="val">Online</span></span
+            >
+          </div>
+          <div class="status-item">
+            <span
+              ><span class="label">Threat Level</span
+              ><span class="val ok">Low</span></span
+            >
+          </div>
+          <div class="status-item">
+            <span
+              ><span class="label">Encryption</span
+              ><span class="val">AES-256</span></span
+            >
+          </div>
+          <div class="status-item">
+            <span
+              ><span class="label">Location</span
+              ><span class="val">Chennai, India</span></span
+            >
+          </div>
+        </div>
+        <div class="status-item">
+          <span class="label">Time</span
+          ><span class="val" id="clock">--:--:--</span>
+        </div>
+      </div>
+
+      <div class="shell">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+          <div class="brand">
+            <div class="logo">LSD/</div>
+            <div class="sub">CYBER PORTFOLIO</div>
+          </div>
+          <nav class="navlist">
+            <a href="#home" class="active">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M3 12l9-9 9 9M5 10v10h14V10" /></svg
+              >Home</a
+            >
+            <a href="#about">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 21c0-4 4-6 8-6s8 2 8 6" /></svg
+              >About</a
+            >
+            <a href="#skills">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="3" width="7" height="7" />
+                <rect x="14" y="3" width="7" height="7" />
+                <rect x="3" y="14" width="7" height="7" />
+                <rect x="14" y="14" width="7" height="7" /></svg
+              >Skills</a
+            >
+            <a href="#experience">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="2" y="7" width="20" height="14" rx="2" />
+                <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" /></svg
+              >Experience</a
+            >
+            <a href="#projects">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"
+                /></svg
+              >Projects</a
+            >
+            <a href="#certs">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="8" r="6" />
+                <path d="M9 14l-2 7 5-3 5 3-2-7" /></svg
+              >Learning Paths</a
+            >
+            <a href="#achievements">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M12 15a6 6 0 100-12 6 6 0 000 12z" />
+                <path d="M8.2 13.9L7 22l5-3 5 3-1.2-8.1" /></svg
+              >Achievements</a
+            >
+            <a href="#tools">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M14.7 6.3a4 4 0 10-5.4 5.4L2 19v3h3l7.3-7.3a4 4 0 005.4-5.4z"
+                /></svg
+              >Tools</a
+            >
+            <a href="#dsa">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="6" cy="6" r="3" />
+                <circle cx="18" cy="6" r="3" />
+                <circle cx="12" cy="18" r="3" />
+                <path d="M6 9v3l6 3M18 9v3l-6 3" /></svg
+              >DSA & CP</a
+            >
+            <a href="#map">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M2 12h20M12 2a15 15 0 010 20 15 15 0 010-20z" /></svg
+              >Threat Map</a
+            >
+            <a href="#terminal">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="4 17 10 11 4 5" />
+                <line x1="12" y1="19" x2="20" y2="19" /></svg
+              >Terminal</a
+            >
+            <a href="#contact">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="M22 6l-10 7L2 6" /></svg
+              >Contact Me</a
+            >
+          </nav>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main">
+          <!-- HERO -->
+          <section id="home" class="hero">
+            <div class="hero-grid">
+              <div>
+                <div class="hero-hi reveal">Hello, I'm</div>
+                <h1 class="reveal">
+                  LAL SINGH<br /><span class="line2">DHARMI</span>
+                </h1>
+                <div class="hero-hi reveal hero-hi-row">
+                  <span class="role-chip">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="16 18 22 12 16 6" />
+                      <polyline points="8 6 2 12 8 18" /></svg
+                    >Cybersecurity Enthusiast</span
+                  >
+                  <span class="role-chip">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="16 18 22 12 16 6" />
+                      <polyline points="8 6 2 12 8 18" /></svg
+                    >Full Stack Web Developer</span
+                  >
+                </div>
+                <p class="desc reveal">
+                  I build <b class="hl-cyan">secure</b> digital experiences and
+                  modern web applications, while continuously sharpening my
+                  skills in <b class="hl-violet">ethical hacking</b>,
+                  penetration testing, and SOC practices through hands-on CTFs
+                  and labs.
+                </p>
+                <div class="badges reveal">
+                  <span class="badge">SOC ASPIRANT</span>
+                  <span class="badge">PENETRATION TESTING</span>
+                  <span class="badge">THREAT HUNTING</span>
+                  <span class="badge">WEB DEVELOPER</span>
+                </div>
+                <div class="cta-row reveal">
+                  <a href="#projects" class="btn-primary"
+                    >Explore My Work
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" /></svg
+                  ></a>
+                  <a href="#" id="resumeBtn" class="btn-ghost"
+                    >Download Resume
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"
+                      /></svg
+                  ></a>
+                </div>
+              </div>
+
+              <div class="hero-visual reveal">
+                <div class="radar"></div>
+                <div class="sweep"></div>
+                <div class="radar-core">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                  >
+                    <path
+                      d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"
+                    />
+                    <path d="M9 12l2 2 4-4" />
+                  </svg>
+                </div>
+                <span class="orbit-dot" style="top: 8%; left: 52%"></span>
+                <span
+                  class="orbit-dot violet"
+                  style="top: 70%; left: 14%"
+                ></span>
+                <span class="orbit-dot red" style="top: 60%; left: 84%"></span>
+                <div class="hero-tag tag-1">
+                  IP TRACE<span class="v">CHN · IN</span>
+                </div>
+                <div class="hero-tag tag-2">
+                  STATUS<span class="v">SECURE</span>
+                </div>
+                <div class="hero-tag tag-3">
+                  ALERTS<span class="v">0 CRITICAL</span>
+                </div>
+                <div class="hero-tag tag-4">
+                  ENCRYPTION<span class="v">AES-256</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="stats-strip">
+              <div class="stat reveal">
+                <div class="icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <path d="M3 9h18M9 21V9" />
+                  </svg>
+                </div>
+                <div class="num" data-count="15">0</div>
+                <div class="lbl">Projects Built</div>
+              </div>
+              <div class="stat reveal">
+                <div class="icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M20.24 12.24a6 6 0 00-8.49-8.49L5 10.5V19h8.5z" />
+                    <line x1="16" y1="8" x2="2" y2="22" />
+                    <line x1="17.5" y1="15" x2="9" y2="15" />
+                  </svg>
+                </div>
+                <div class="num" data-count="8">0</div>
+                <div class="lbl">Machines Rooted</div>
+              </div>
+              <div class="stat reveal">
+                <div class="icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                </div>
+                <div class="num" data-count="300" data-suffix="+">0</div>
+                <div class="lbl">Challenges Solved</div>
+              </div>
+              <div class="stat reveal">
+                <div class="icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z"
+                    />
+                  </svg>
+                </div>
+                <div class="num" data-count="50" data-suffix="+">0</div>
+                <div class="lbl">Vulns Found (Labs)</div>
+              </div>
+              <div class="stat reveal">
+                <div class="icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                  </svg>
+                </div>
+                <div class="num" data-count="6">0</div>
+                <div class="lbl">DSA Topics Mastered</div>
+              </div>
+              <div class="stat reveal">
+                <div class="icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                </div>
+                <div class="num">24/7</div>
+                <div class="lbl">Learning Mode</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ABOUT -->
+          <section id="about" class="sec">
+            <div class="section-head reveal">
+              <div class="eyebrow">// 01 About</div>
+              <h2>Who I Am</h2>
+            </div>
+            <div class="panel reveal grid-2">
+              <div>
+                <p
+                  style="
+                    font-size: 13.5px;
+                    color: var(--text-dim);
+                    line-height: 1.8;
+                  "
+                >
+                  I'm a Computer Science student at Patrician College of Arts
+                  and Science, Chennai, with a strong passion for both web
+                  development and cybersecurity. I specialize in building
+                  responsive, full-stack applications while learning offensive
+                  and defensive security techniques through consistent CTF
+                  practice on platforms like TryHackMe and BTLO.
+                </p>
+                <p
+                  style="
+                    font-size: 13.5px;
+                    color: var(--text-dim);
+                    line-height: 1.8;
+                    margin-top: 12px;
+                  "
+                >
+                  My goal is to build secure software while working toward a
+                  career as a Penetration Tester or SOC Analyst — someone who
+                  understands how systems break so I can help build ones that
+                  don't.
+                </p>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  gap: 10px;
+                  font-family: var(--mono);
+                  font-size: 12px;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 1px solid var(--line);
+                    padding-bottom: 8px;
+                  "
+                >
+                  <span style="color: var(--text-faint)">EDUCATION</span
+                  ><span>B.Sc. Computer Science</span>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 1px solid var(--line);
+                    padding-bottom: 8px;
+                  "
+                >
+                  <span style="color: var(--text-faint)">COLLEGE</span
+                  ><span>Patrician College, Chennai</span>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 1px solid var(--line);
+                    padding-bottom: 8px;
+                  "
+                >
+                  <span style="color: var(--text-faint)">DURATION</span
+                  ><span>2023 – 2026</span>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 1px solid var(--line);
+                    padding-bottom: 8px;
+                  "
+                >
+                  <span style="color: var(--text-faint)">FOCUS</span
+                  ><span>Cybersecurity & Full-Stack Dev</span>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 1px solid var(--line);
+                    padding-bottom: 8px;
+                  "
+                >
+                  <span style="color: var(--text-faint)">LANGUAGES</span
+                  ><span>English, Hindi, Tamil</span>
+                </div>
+                <div style="display: flex; justify-content: space-between">
+                  <span style="color: var(--text-faint)">STATUS</span
+                  ><span style="color: var(--green)"
+                    >Open to Opportunities</span
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SKILLS / CASE FILES / EXPERIENCE -->
+          <section id="skills" class="sec grid-3">
+            <div class="panel reveal">
+              <div class="section-head" style="margin-bottom: 14px">
+                <div class="eyebrow">Cyber Arsenal</div>
+                <h2 style="font-size: 16px">My weapons of choice</h2>
+              </div>
+              <div class="skill-grid" id="skillGrid"></div>
+              <button class="view-all-btn" id="viewAllSkillsBtn" type="button">
+                View All Skills →
+              </button>
+            </div>
+
+            <div id="projects" class="panel reveal">
+              <div class="section-head" style="margin-bottom: 4px">
+                <div class="eyebrow">Classified Case Files</div>
+                <h2 style="font-size: 16px">Real world problems, solved</h2>
+              </div>
+              <div class="case-file">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                  "
+                >
+                  <span class="case-badge"
+                    >Case #<span id="caseNum">01</span></span
+                  >
+                  <span
+                    class="case-badge"
+                    id="caseThreat"
+                    style="
+                      color: var(--amber);
+                      border-color: rgba(255, 180, 84, 0.4);
+                      background: rgba(255, 180, 84, 0.08);
+                    "
+                    >Medium</span
+                  >
+                </div>
+                <h3 id="caseTitle">Cybersecurity Portfolio Website</h3>
+                <p id="caseDesc">
+                  A fully animated hacker-themed portfolio with a live terminal,
+                  matrix backdrop, and scroll-triggered GSAP animations.
+                </p>
+                <div class="tech-tags" id="caseTags">
+                  <span>HTML</span><span>CSS</span><span>JS</span
+                  ><span>GSAP</span>
+                </div>
+              </div>
+              <div class="case-nav">
+                <button id="casePrev" type="button">← Prev</button>
+                <button id="caseNext" type="button">Next →</button>
+              </div>
+              <div class="case-dots" id="caseDots"></div>
+            </div>
+
+            <div id="experience" class="panel reveal">
+              <div class="section-head" style="margin-bottom: 14px">
+                <div class="eyebrow">Experience Timeline</div>
+                <h2 style="font-size: 16px">My journey so far</h2>
+              </div>
+              <div class="timeline">
+                <div class="t-item">
+                  <div class="yr">2024 — ONGOING</div>
+                  <h4>Full Stack Developer</h4>
+                  <p>Building secure, responsive web applications</p>
+                </div>
+                <div class="t-item">
+                  <div class="yr">2023</div>
+                  <h4>Frontend Developer Intern</h4>
+                  <p>Unified Mentor</p>
+                </div>
+                <div class="t-item">
+                  <div class="yr">2023</div>
+                  <h4>Java Development Intern</h4>
+                  <p>Vita Skills</p>
+                </div>
+                <div class="t-item">
+                  <div class="yr">2022</div>
+                  <h4>Started My Journey</h4>
+                  <p>Self learning · CTFs · TryHackMe</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- CERTS / CTF / STACK -->
+          <section id="certs" class="sec grid-3">
+            <div class="panel reveal">
+              <div class="section-head" style="margin-bottom: 14px">
+                <div class="eyebrow">Learning Paths</div>
+                <h2 style="font-size: 16px">Platforms I train on</h2>
+              </div>
+              <div class="cert-grid">
+                <div class="cert-card">
+                  <div class="badge-ic red">TH</div>
+                  <div class="name">TryHackMe</div>
+                  <div class="status">In Progress</div>
+                </div>
+                <div class="cert-card">
+                  <div class="badge-ic cyan">BT</div>
+                  <div class="name">BTLO</div>
+                  <div class="status">Blue Team</div>
+                </div>
+                <div class="cert-card">
+                  <div class="badge-ic violet">CTF</div>
+                  <div class="name">CTF Practice</div>
+                  <div class="status">Active</div>
+                </div>
+                <div class="cert-card">
+                  <div class="badge-ic green">AD</div>
+                  <div class="name">Active Directory</div>
+                  <div class="status">Learning</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="achievements" class="panel reveal">
+              <div class="section-head" style="margin-bottom: 10px">
+                <div class="eyebrow">CTF Focus Areas</div>
+                <h2 style="font-size: 16px">Hack. Learn. Repeat.</h2>
+              </div>
+              <div class="ctf-wrap">
+                <div class="ctf-ring">
+                  <svg width="150" height="150" viewBox="0 0 150 150">
+                    <circle
+                      cx="75"
+                      cy="75"
+                      r="64"
+                      stroke="var(--line)"
+                      stroke-width="10"
+                      fill="none"
+                    />
+                    <circle
+                      id="ctfCircle"
+                      cx="75"
+                      cy="75"
+                      r="64"
+                      stroke="var(--violet)"
+                      stroke-width="10"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-dasharray="402"
+                      stroke-dashoffset="402"
+                    />
+                  </svg>
+                  <div class="center">
+                    <div class="n">8+</div>
+                    <div class="l">Machines Rooted</div>
+                  </div>
+                </div>
+                <div class="ctf-list">
+                  <div class="ctf-row">
+                    <span class="left"
+                      ><span class="sw" style="background: var(--cyan)"></span
+                      >Web Exploitation</span
+                    >
+                    <div class="barwrap">
+                      <div
+                        class="bar"
+                        style="width: 85%; background: var(--cyan)"
+                      ></div>
+                    </div>
+                    <span class="pct">85%</span>
+                  </div>
+                  <div class="ctf-row">
+                    <span class="left"
+                      ><span class="sw" style="background: var(--violet)"></span
+                      >Privilege Escalation</span
+                    >
+                    <div class="barwrap">
+                      <div
+                        class="bar"
+                        style="width: 70%; background: var(--violet)"
+                      ></div>
+                    </div>
+                    <span class="pct">70%</span>
+                  </div>
+                  <div class="ctf-row">
+                    <span class="left"
+                      ><span class="sw" style="background: var(--green)"></span
+                      >Active Directory</span
+                    >
+                    <div class="barwrap">
+                      <div
+                        class="bar"
+                        style="width: 60%; background: var(--green)"
+                      ></div>
+                    </div>
+                    <span class="pct">60%</span>
+                  </div>
+                  <div class="ctf-row">
+                    <span class="left"
+                      ><span class="sw" style="background: var(--amber)"></span
+                      >Digital Forensics</span
+                    >
+                    <div class="barwrap">
+                      <div
+                        class="bar"
+                        style="width: 45%; background: var(--amber)"
+                      ></div>
+                    </div>
+                    <span class="pct">45%</span>
+                  </div>
+                  <div class="ctf-row">
+                    <span class="left"
+                      ><span class="sw" style="background: var(--red)"></span
+                      >Linux Enumeration</span
+                    >
+                    <div class="barwrap">
+                      <div
+                        class="bar"
+                        style="width: 75%; background: var(--red)"
+                      ></div>
+                    </div>
+                    <span class="pct">75%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel reveal">
+              <div class="section-head" style="margin-bottom: 14px">
+                <div class="eyebrow">Developer Stack</div>
+                <h2 style="font-size: 16px">Full stack expertise</h2>
+              </div>
+              <div class="stack-grid" id="stackGrid"></div>
+            </div>
+          </section>
+
+          <!-- DSA / MAP / TOOLS -->
+          <section id="dsa" class="sec grid-3">
+            <div class="panel reveal">
+              <div class="section-head" style="margin-bottom: 14px">
+                <div class="eyebrow">DSA & Problem Solving</div>
+                <h2 style="font-size: 16px">Logic. Structure. Efficiency.</h2>
+              </div>
+              <div class="dsa-grid" id="dsaGrid"></div>
+            </div>
+
+            <div id="map" class="panel reveal">
+              <div class="section-head" style="margin-bottom: 14px">
+                <div class="eyebrow">Threat Intel Visualization</div>
+                <h2 style="font-size: 16px">Demo attack-path simulation</h2>
+              </div>
+              <div class="map-box">
+                <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice">
+                  <g id="mapDots"></g>
+                  <path
+                    id="mp1"
+                    d="M60,150 Q150,40 300,60"
+                    stroke="var(--cyan)"
+                    stroke-width="1.2"
+                    fill="none"
+                    opacity="0.5"
+                    stroke-dasharray="4 4"
+                  />
+                  <path
+                    id="mp2"
+                    d="M340,150 Q220,180 90,90"
+                    stroke="var(--violet)"
+                    stroke-width="1.2"
+                    fill="none"
+                    opacity="0.5"
+                    stroke-dasharray="4 4"
+                  />
+                  <circle cx="60" cy="150" r="3" fill="var(--red)">
+                    <animate
+                      attributeName="r"
+                      values="3;6;3"
+                      dur="2s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  <circle cx="300" cy="60" r="3" fill="var(--cyan)">
+                    <animate
+                      attributeName="r"
+                      values="3;6;3"
+                      dur="2.4s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  <circle cx="340" cy="150" r="3" fill="var(--amber)">
+                    <animate
+                      attributeName="r"
+                      values="3;6;3"
+                      dur="1.8s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                  <circle cx="90" cy="90" r="3" fill="var(--green)">
+                    <animate
+                      attributeName="r"
+                      values="3;6;3"
+                      dur="2.2s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                </svg>
+              </div>
+              <div class="map-stats">
+                <div class="map-stat">
+                  <div class="n" data-count="120">0</div>
+                  <div class="l">Sim Events</div>
+                </div>
+                <div class="map-stat">
+                  <div class="n" data-count="6">0</div>
+                  <div class="l">Targets Modeled</div>
+                </div>
+                <div class="map-stat">
+                  <div class="n" data-count="3">0</div>
+                  <div class="l">Vectors Studied</div>
+                </div>
+                <div class="map-stat">
+                  <div class="n green">LOW</div>
+                  <div class="l">Threat Level</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="tools" class="panel reveal tools-panel">
+              <div class="section-head" style="margin-bottom: 6px; width: 100%">
+                <div class="eyebrow">Cyber Tools</div>
+                <h2 style="font-size: 16px">Tools of the trade</h2>
+              </div>
+              <div class="tools-ring" id="toolsRing">
+                <div class="ring-line"></div>
+                <div class="center-btn">EXPLORE<br />TOOLS</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- TERMINAL / CONTACT -->
+          <section id="terminal" class="sec grid-2">
+            <div class="panel reveal term-panel">
+              <div class="term">
+                <div class="term-bar">
+                  <i></i><i></i><i></i><span>lsd@portfolio: ~</span>
+                </div>
+                <div class="term-body" id="termBody">
+                  <div>
+                    Try some commands. Type <span class="cy">'help'</span> to
+                    see all commands.
+                  </div>
+                  <div>&nbsp;</div>
+                </div>
+                <div class="term-input-row">
+                  <span class="prompt">user@LSD-Portfolio:~$</span>
+                  <input
+                    type="text"
+                    id="termInput"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="type a command..."
+                    maxlength="200"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div id="contact" class="panel reveal">
+              <div class="section-head" style="margin-bottom: 14px">
+                <div class="eyebrow">Secure Contact Gateway</div>
+                <h2 style="font-size: 16px">Send me an encrypted message</h2>
+              </div>
+              <form id="contactForm" novalidate>
+                <div class="form-row">
+                  <div class="field">
+                    <label for="cName">Your Name</label>
+                    <input
+                      type="text"
+                      id="cName"
+                      name="cName"
+                      required
+                      maxlength="100"
+                      autocomplete="name"
+                    />
+                    <div class="field-error" id="cNameError"></div>
+                  </div>
+                  <div class="field">
+                    <label for="cEmail">Your Email</label>
+                    <input
+                      type="email"
+                      id="cEmail"
+                      name="cEmail"
+                      required
+                      maxlength="254"
+                      autocomplete="email"
+                    />
+                    <div class="field-error" id="cEmailError"></div>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="cMsg">Your Message</label>
+                  <textarea
+                    id="cMsg"
+                    name="cMsg"
+                    required
+                    maxlength="2000"
+                  ></textarea>
+                  <div class="field-error" id="cMsgError"></div>
+                </div>
+                <button
+                  type="submit"
+                  class="btn-primary submit-btn"
+                  id="contactSubmitBtn"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect x="3" y="11" width="18" height="10" rx="2" />
+                    <path d="M7 11V7a5 5 0 0110 0v4" />
+                  </svg>
+                  Encrypt & Transmit
+                </button>
+              </form>
+              <div class="encrypt-log" id="encryptLog"></div>
+              <div class="contact-links">
+                <a
+                  href="https://github.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M12 .5C5.73.5.98 5.24.98 11.52c0 5.02 3.29 9.28 7.84 10.78.57.1.78-.25.78-.55v-2.15c-3.19.7-3.86-1.36-3.86-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a10.98 10.98 0 015.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.08.78 2.17v3.22c0 .3.21.66.79.55A11.52 11.52 0 0023.02 11.5C23.02 5.24 18.27.5 12 .5z"
+                    />
+                  </svg>
+                  github.com/lalsinghdharmi</a
+                >
+                <a
+                  href="https://linkedin.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45z"
+                    />
+                  </svg>
+                  linkedin.com/in/lalsinghdharmi</a
+                >
+                <a href="mailto:lalsinghdharmi@example.com">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="M22 6l-10 7L2 6" />
+                  </svg>
+                  lalsinghdharmi@example.com</a
+                >
+                <a href="#contact">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="10" r="3" />
+                    <path
+                      d="M12 21s7-6.5 7-11a7 7 0 10-14 0c0 4.5 7 11 7 11z"
+                    />
+                  </svg>
+                  Chennai, Tamil Nadu, India</a
+                >
+              </div>
+            </div>
+          </section>
+
+          <footer>
+            © <span id="year"></span> Lal Singh Dharmi. All Rights Reserved.<br />
+            Built with <span class="heart">♥</span> &amp; lots of
+            <span class="coffee">coffee</span>.
+          </footer>
+        </main>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
